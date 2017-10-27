@@ -22,6 +22,18 @@
         <activity android:name=".WelcomeUser">
 
         </activity>
+
+        <activity android:name=".RegisterComplaint"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".UsersListActivity"
+            android:screenOrientation="portrait"/>
+
+
+        <activity android:name=".DisplayComplaint">
+
+        </activity>
+
     </application>
 
 </manifest>

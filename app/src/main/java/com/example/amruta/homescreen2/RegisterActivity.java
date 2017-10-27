@@ -18,7 +18,7 @@ import android.view.View;
 import com.example.amruta.homescreen2.R;
 import com.example.amruta.homescreen2.helper.InputValidation;
 import com.example.amruta.homescreen2.Model.User;
-import com.example.amruta.homescreen2.sql.databaseHelper;
+import com.example.amruta.homescreen2.sql.DataBaseHelper;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private AppCompatTextView appCompatTextViewLoginLink;
 
     private InputValidation inputValidation;
-    private databaseHelper databaseHelper;
+    private DataBaseHelper databaseHelper;
     private User user;
 
     @Override
@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      */
     private void initObjects() {
         inputValidation = new InputValidation(activity);
-        databaseHelper = new databaseHelper(activity);
+        databaseHelper = new DataBaseHelper(activity);
         user = new User();
 
     }
