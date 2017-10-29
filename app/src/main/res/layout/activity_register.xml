@@ -9,7 +9,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp"
-    tools:context=".com.example.amruta.homescreen2.RegisterActivity">
+    tools:context="com.example.amruta.homescreen2.RegisterActivity">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:hint="@string/hint_name"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -46,7 +46,7 @@
                 android:hint="@string/hint_email"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -63,7 +63,7 @@
                 android:hint="@string/hint_contact"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -79,7 +79,7 @@
                 android:hint="@string/hint_address"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -97,7 +97,7 @@
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -115,7 +115,7 @@
                 android:hint="@string/hint_confirm_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="#FF6F00"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:text="@string/text_register" />
 
         <android.support.v7.widget.AppCompatTextView

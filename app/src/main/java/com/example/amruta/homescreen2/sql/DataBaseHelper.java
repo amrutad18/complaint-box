@@ -1,8 +1,5 @@
 package com.example.amruta.homescreen2.sql;
 
-/**
- * Created by amruta on 25/10/17.
- */
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,10 +7,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.amruta.homescreen2.Model.User;
+import com.example.amruta.homescreen2.Model.Complaint;
 
 import java.util.ArrayList;
 import java.util.List;
-public class databaseHelper extends SQLiteOpenHelper {
+
+/**
+ * Created by amruta on 27/10/17.
+ */
+
+public class DataBaseHelper extends SQLiteOpenHelper  {
 
     private static final int DATABASE_VERSION = 1;
 
@@ -32,25 +35,42 @@ public class databaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_PASSWORD = "user_password";
     // create table sql query
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
-             + COLUMN_USER_NAME + " TEXT,"+ COLUMN_USER_EMAIL + " TEXT,"+ COLUMN_USER_CONTACT + " TEXT,"
+            + COLUMN_USER_NAME + " TEXT,"+ COLUMN_USER_EMAIL + " TEXT,"+ COLUMN_USER_CONTACT + " TEXT,"
             + COLUMN_USER_ADDRESS + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")";
 
-    // drop table sql query
+    // drop table sql query for user table
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
 
+    private static final String TABLE_COMPLAINTS = "complaints";
 
-    /**
-     * Constructor
-     *
-     * @param context
-     */
-    public databaseHelper(Context context) {
+    // Comlaint table  Columns names
+    private static final String COLUMN_USER_EMAILC = "user_email";
+    private static final String COLUMN_PROD_TYPE = "prod_type";
+    private static final String COLUMN_MODEL_NO = "model_no";
+    private static final String COLUMN_FDATE = "file_date";
+    private static final String COLUMN_CDATE = "close_date";
+    private static final String COLUMN_PRIORITY = "priority";
+    private static final String COLUMN_STATUS = "status_code";
+    private static final String COLUMN_DESCRIPTION ="description";
+
+    // create table sql query
+    private String CREATE_COMPLAINT_TABLE = "CREATE TABLE " + TABLE_COMPLAINTS + "("
+            + COLUMN_USER_EMAILC + " TEXT," + COLUMN_PROD_TYPE + " TEXT,"
+            + COLUMN_MODEL_NO + " TEXT," + COLUMN_FDATE + " TEXT," + COLUMN_CDATE + " TEXT," + COLUMN_PRIORITY + " INTEGER," +
+            COLUMN_STATUS + " INTEGER," + COLUMN_DESCRIPTION + " TEXT" + ")";
+
+    // drop table sql query
+    private String DROP_COMPLAINT_TABLE = "DROP TABLE IF EXISTS " + TABLE_COMPLAINTS;
+
+
+    public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_COMPLAINT_TABLE);
     }
 
 
@@ -59,6 +79,7 @@ public class databaseHelper extends SQLiteOpenHelper {
 
         //Drop User Table if exist
         db.execSQL(DROP_USER_TABLE);
+        db.execSQL(DROP_COMPLAINT_TABLE);
 
         // Create tables again
         onCreate(db);
@@ -82,6 +103,28 @@ public class databaseHelper extends SQLiteOpenHelper {
 
         // Inserting Row
         db.insert(TABLE_USER, null, values);
+        db.close();
+    }
+
+    /**
+     * This method is to create new Complaint record
+     *
+     * @param complaint
+     */
+    public void addComplaint(Complaint complaint) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_EMAILC,complaint.getUser());
+        values.put(COLUMN_PROD_TYPE,"AC");
+        values.put(COLUMN_MODEL_NO,complaint.getModelNo());
+        values.put(COLUMN_FDATE,complaint.getFileDate());
+        values.put(COLUMN_DESCRIPTION,complaint.getDetails());
+        values.put(COLUMN_STATUS,0);
+        values.put(COLUMN_CDATE,"date");
+        values.put(COLUMN_PRIORITY,0);
+        // Inserting Row
+        db.insert(TABLE_COMPLAINTS, null, values);
         db.close();
     }
 
@@ -142,6 +185,66 @@ public class databaseHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * This method is to fetch all complaints and return the list
+     *
+     * @return list
+     */
+    public  List<Complaint> getAllComplaints() {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_USER_EMAILC,
+                COLUMN_PROD_TYPE,
+                COLUMN_MODEL_NO,
+                COLUMN_FDATE,
+
+        };
+        // sorting orders
+        String sortOrder =
+                COLUMN_FDATE + " ASC";
+        List<Complaint> complaintList = new ArrayList<Complaint>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // query the user table
+        /**
+         * Here query function is used to fetch records from user table this function works like we use sql query.
+         * SQL query equivalent to this query function is
+         * SELECT user_id,user_name,user_email,user_password FROM user ORDER BY user_name;
+         */
+        Cursor cursor = db.query(TABLE_COMPLAINTS, //Table to query
+                columns,    //columns to return
+                null,        //columns for the WHERE clause
+                null,        //The values for the WHERE clause
+                null,       //group the rows
+                null,       //filter by row groups
+                sortOrder); //The sort order
+
+
+        // Traversing through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Complaint c = new Complaint();
+                c.setUser(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAILC)));
+                c.setProductType(cursor.getString(cursor.getColumnIndex(COLUMN_PROD_TYPE)));
+                c.setModelNo(cursor.getString(cursor.getColumnIndex(COLUMN_MODEL_NO)));
+                c.setFileDate(cursor.getInt(cursor.getColumnIndex(COLUMN_FDATE)));
+                //c.setStatus_code(cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)));
+                //c.setPriority(cursor.getInt(cursor.getColumnIndex(COLUMN_PRIORITY)));
+                //c.setCloseDate(cursor.getString(cursor.getColumnIndex(COLUMN_CDATE)));
+                //c.setDetails(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+                // Adding record to list
+                complaintList.add(c);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        // return user list
+        return complaintList;
+    }
+
+
+    /**
      * This method to update user record
      *
      * @param user
@@ -174,6 +277,21 @@ public class databaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * This method is to delete complaint record
+     *
+     * @param complaint
+     */
+    public void deleteComplaint(Complaint complaint) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // delete record by id
+        String email = complaint.getUser();
+        String model = complaint.getModelNo();
+        db.delete(TABLE_COMPLAINTS, COLUMN_USER_EMAILC + " = ? AND " + COLUMN_MODEL_NO + "= ?",
+                new String[]{email, model});
+        db.close();
+    }
+
 
     /**
      * This method to check user exist or not
@@ -202,6 +320,45 @@ public class databaseHelper extends SQLiteOpenHelper {
          * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com';
          */
         Cursor cursor = db.query(TABLE_USER, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if (cursorCount > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public boolean checkComplaint(String email) {
+
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_DESCRIPTION
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_USER_EMAILC + " = ?";
+
+        // selection argument
+        String[] selectionArgs = {email};
+
+        // query user table with condition
+        /**
+         * Here query function is used to fetch records from user table this function works like we use sql query.
+         * SQL query equivalent to this query function is
+         * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com';
+         */
+        Cursor cursor = db.query(TABLE_COMPLAINTS, //Table to query
                 columns,                    //columns to return
                 selection,                  //columns for the WHERE clause
                 selectionArgs,              //The values for the WHERE clause
@@ -265,3 +422,6 @@ public class databaseHelper extends SQLiteOpenHelper {
     }
 
 }
+
+
+

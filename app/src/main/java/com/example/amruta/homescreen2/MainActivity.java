@@ -16,7 +16,7 @@ import android.view.View;
 
 import com.example.amruta.homescreen2.R;
 import com.example.amruta.homescreen2.helper.InputValidation;
-import com.example.amruta.homescreen2.sql.databaseHelper;
+import com.example.amruta.homescreen2.sql.DataBaseHelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = MainActivity.this;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AppCompatTextView textViewLinkRegister;
 
     private InputValidation inputValidation;
-    private databaseHelper databaseHelper;
+    private DataBaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * This method is to initialize objects to be used
      */
     private void initObjects() {
-        databaseHelper = new databaseHelper(activity);
+        databaseHelper = new DataBaseHelper(activity);
         inputValidation = new InputValidation(activity);
 
     }
