@@ -56,7 +56,7 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
     // create table sql query
     private String CREATE_COMPLAINT_TABLE = "CREATE TABLE " + TABLE_COMPLAINTS + "("
             + COLUMN_USER_EMAILC + " TEXT," + COLUMN_PROD_TYPE + " TEXT,"
-            + COLUMN_MODEL_NO + " TEXT," + COLUMN_FDATE + " TEXT," + COLUMN_CDATE + " TEXT," + COLUMN_PRIORITY + " INTEGER," +
+            + COLUMN_MODEL_NO + " TEXT," + COLUMN_FDATE + " TEXT DEFAULT CURRENT_TIMESTAMP," + COLUMN_CDATE + " TEXT," + COLUMN_PRIORITY + " INTEGER," +
             COLUMN_STATUS + " INTEGER," + COLUMN_DESCRIPTION + " TEXT" + ")";
 
     // drop table sql query
@@ -116,16 +116,16 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_EMAILC,complaint.getUser());
-        values.put(COLUMN_PROD_TYPE,"AC");
+        values.put(COLUMN_PROD_TYPE,complaint.getProductType());
         values.put(COLUMN_MODEL_NO,complaint.getModelNo());
-        values.put(COLUMN_FDATE,complaint.getFileDate());
         values.put(COLUMN_DESCRIPTION,complaint.getDetails());
         values.put(COLUMN_STATUS,0);
-        values.put(COLUMN_CDATE,"date");
-        values.put(COLUMN_PRIORITY,0);
+        values.put(COLUMN_CDATE,0);
+        values.put(COLUMN_PRIORITY,complaint.getPriority());
         // Inserting Row
         db.insert(TABLE_COMPLAINTS, null, values);
         db.close();
+        System.out.println("inserted values");
     }
 
     /**
@@ -144,7 +144,7 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
         };
         // sorting orders
         String sortOrder =
-                COLUMN_USER_NAME + " ASC";
+                COLUMN_FDATE + " ASC";
         List<User> userList = new ArrayList<User>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -196,6 +196,10 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
                 COLUMN_PROD_TYPE,
                 COLUMN_MODEL_NO,
                 COLUMN_FDATE,
+                COLUMN_STATUS,
+                COLUMN_PRIORITY,
+                COLUMN_CDATE,
+                COLUMN_DESCRIPTION
 
         };
         // sorting orders
@@ -227,17 +231,18 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
                 c.setUser(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAILC)));
                 c.setProductType(cursor.getString(cursor.getColumnIndex(COLUMN_PROD_TYPE)));
                 c.setModelNo(cursor.getString(cursor.getColumnIndex(COLUMN_MODEL_NO)));
-                c.setFileDate(cursor.getInt(cursor.getColumnIndex(COLUMN_FDATE)));
-                //c.setStatus_code(cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)));
-                //c.setPriority(cursor.getInt(cursor.getColumnIndex(COLUMN_PRIORITY)));
-                //c.setCloseDate(cursor.getString(cursor.getColumnIndex(COLUMN_CDATE)));
-                //c.setDetails(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+                c.setFileDate(cursor.getString(cursor.getColumnIndex(COLUMN_FDATE)));
+                c.setStatus_code(cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)));
+                c.setPriority(cursor.getInt(cursor.getColumnIndex(COLUMN_PRIORITY)));
+                c.setCloseDate(cursor.getString(cursor.getColumnIndex(COLUMN_CDATE)));
+                c.setDetails(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
                 // Adding record to list
                 complaintList.add(c);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
+        System.out.println("list fetched");
 
         // return user list
         return complaintList;

@@ -8,7 +8,7 @@ public class Complaint {
     private String user;
     private String productType;
     private String modelNo;
-    private int fileDate;
+    private String fileDate;
     private String closeDate;
     private int priority;
     private int status_code;
@@ -26,10 +26,10 @@ public class Complaint {
     public void setProductType(String ptype) {
         this.productType = ptype;
     }
-    public int getFileDate() {
+    public String getFileDate() {
         return fileDate;
     }
-    public void setFileDate(int fdate) {
+    public void setFileDate(String fdate) {
         this.fileDate = fdate;
     }
     public String getCloseDateDate() {
