@@ -16,12 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity">
-
-        </activity>
-        <activity android:name=".WelcomeUser">
-
-        </activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".WelcomeUser" />
+        <activity
+            android:name=".AdminDashboard"
+            android:label="@string/title_activity_admin_dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TableActivity"></activity>
     </application>
 
 </manifest>
