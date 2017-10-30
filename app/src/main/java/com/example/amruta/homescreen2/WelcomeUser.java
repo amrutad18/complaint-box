@@ -14,9 +14,11 @@ import android.view.View;
 import android.widget.TextView;
 public class WelcomeUser extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = WelcomeUser.this;
+
     private TextView textViewName;
     String emailFromIntent;
     private AppCompatButton appCompatButtonRegister;
+    private AppCompatButton appCompatButtonViewComplaints;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,11 +40,13 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
     private void initViews() {
         textViewName = (TextView)findViewById(R.id.textView);
         appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
+        appCompatButtonViewComplaints = (AppCompatButton) findViewById(R.id.appCompatButtonViewComplaints);
     }
 
 
     private void initListeners() {
         appCompatButtonRegister.setOnClickListener(this);
+        appCompatButtonViewComplaints.setOnClickListener(this);
         //appCompatTextViewLoginLink.setOnClickListener(this);
 
     }
@@ -57,6 +61,14 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
 
                 accountsIntent.putExtra("EMAIL",emailFromIntent);
                 startActivity(accountsIntent);
+
+                break;
+            case R.id.appCompatButtonViewComplaints:
+                Intent accountsIntent2 = new Intent(activity,UsersListActivity.class);
+                //This sends the email of the user to the new activity
+
+                accountsIntent2.putExtra("EMAIL",emailFromIntent);
+                startActivity(accountsIntent2);
 
                 break;
         }

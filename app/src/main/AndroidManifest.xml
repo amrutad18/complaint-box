@@ -28,6 +28,8 @@
 
         <activity android:name=".UsersListActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".WelcomeAdmin"
+            android:screenOrientation="portrait"/>
 
 
         <activity android:name=".DisplayComplaint">

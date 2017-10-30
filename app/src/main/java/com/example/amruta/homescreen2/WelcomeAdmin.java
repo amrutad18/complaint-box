@@ -4,32 +4,39 @@ package com.example.amruta.homescreen2;
  * Created by amruta on 27/10/17.
  */
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.amruta.homescreen2.R;
-import com.example.amruta.homescreen2.adapters.UsersRecyclerAdapter;
+import com.example.amruta.homescreen2.adapters.AdminRecyclersAdapter;
 import com.example.amruta.homescreen2.Model.Complaint;
 import com.example.amruta.homescreen2.sql.DataBaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersListActivity extends AppCompatActivity {
+public class WelcomeAdmin extends AppCompatActivity implements View.OnClickListener {
 
-    private AppCompatActivity activity = UsersListActivity.this;
+    private AppCompatActivity activity = WelcomeAdmin.this;
     private AppCompatTextView textViewName;
     private RecyclerView recyclerViewUsers;
     private List<Complaint> listUsers;
-    private UsersRecyclerAdapter usersRecyclerAdapter;
+    private AdminRecyclersAdapter adminRecyclerAdapter;
     private DataBaseHelper databaseHelper;
     String emailFromIntent;
+    private Button appCompatButtonInProcess;
+    private Button appCompatButtonResolved;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +45,7 @@ public class UsersListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         initViews();
         initObjects();
+        initListeners();
 
     }
 
@@ -47,7 +55,39 @@ public class UsersListActivity extends AppCompatActivity {
     private void initViews() {
         textViewName = (AppCompatTextView) findViewById(R.id.textViewName);
         System.out.println("Inside initViews");
+        appCompatButtonInProcess = (Button) findViewById(R.id.process);
+        appCompatButtonResolved = (Button) findViewById(R.id.resolved);
         recyclerViewUsers = (RecyclerView) findViewById(R.id.recyclerViewUsers);
+    }
+
+    private void initListeners() {
+        if(appCompatButtonResolved==null)
+        {
+            System.out.println("HEHEHe");
+        }
+        //appCompatButtonResolved.setOnClickListener(this);
+        //appCompatButtonInProcess.setOnClickListener(this);
+        //appCompatTextViewLoginLink.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.process:
+                // When the admin presses the in process button(sends the engineer)
+                System.out.println((AppCompatTextView) findViewById(R.id.textViewEmail));
+                break;
+            case R.id.resolved:
+                Intent accountsIntent2 = new Intent(activity,UsersListActivity.class);
+                //This sends the email of the user to the new activity
+
+                accountsIntent2.putExtra("EMAIL",emailFromIntent);
+                startActivity(accountsIntent2);
+
+                break;
+        }
     }
 
     /**
@@ -55,13 +95,13 @@ public class UsersListActivity extends AppCompatActivity {
      */
     private void initObjects() {
         listUsers = new ArrayList<>();
-        usersRecyclerAdapter = new UsersRecyclerAdapter(listUsers);
+        adminRecyclerAdapter = new AdminRecyclersAdapter(listUsers);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewUsers.setLayoutManager(mLayoutManager);
         recyclerViewUsers.setItemAnimator(new DefaultItemAnimator());
         recyclerViewUsers.setHasFixedSize(true);
-        recyclerViewUsers.setAdapter(usersRecyclerAdapter);
+        recyclerViewUsers.setAdapter(adminRecyclerAdapter);
         databaseHelper = new DataBaseHelper(activity);
 
         emailFromIntent = getIntent().getStringExtra("EMAIL");
@@ -80,7 +120,7 @@ public class UsersListActivity extends AppCompatActivity {
             protected Void doInBackground(Void... params) {
                 listUsers.clear();
                 List<Complaint>temp;
-                listUsers.addAll(databaseHelper.getAllComplaints(emailFromIntent));
+                listUsers.addAll(databaseHelper.getAllComplaints());
 
                 return null;
             }
@@ -88,7 +128,7 @@ public class UsersListActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                usersRecyclerAdapter.notifyDataSetChanged();
+                adminRecyclerAdapter.notifyDataSetChanged();
             }
         }.execute();
     }

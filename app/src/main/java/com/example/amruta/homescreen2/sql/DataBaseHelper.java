@@ -119,7 +119,9 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
         values.put(COLUMN_PROD_TYPE,complaint.getProductType());
         values.put(COLUMN_MODEL_NO,complaint.getModelNo());
         values.put(COLUMN_DESCRIPTION,complaint.getDetails());
-        values.put(COLUMN_STATUS,0);
+        values.put(COLUMN_STATUS,0);//0 status means the complaint has been registered
+        // 2 means redressal is in process
+        // 1 means the complaint has resloved
         values.put(COLUMN_CDATE,0);
         values.put(COLUMN_PRIORITY,complaint.getPriority());
         // Inserting Row
@@ -189,6 +191,66 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
      *
      * @return list
      */
+    public  List<Complaint> getAllComplaints(String email) {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_USER_EMAILC,
+                COLUMN_PROD_TYPE,
+                COLUMN_MODEL_NO,
+                COLUMN_FDATE,
+                COLUMN_STATUS,
+                COLUMN_PRIORITY,
+                COLUMN_CDATE,
+                COLUMN_DESCRIPTION
+
+        };
+        // sorting orders
+        String sortOrder =
+                COLUMN_FDATE + " ASC";
+        List<Complaint> complaintList = new ArrayList<Complaint>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] selectionArgs = {email};
+
+        // query the user table
+        /**
+         * Here query function is used to fetch records from user table this function works like we use sql query.
+         * SQL query equivalent to this query function is
+         * SELECT user_id,user_name,user_email,user_password FROM user ORDER BY user_name;
+         */
+        Cursor cursor = db.query(TABLE_COMPLAINTS, //Table to query
+                columns,    //columns to return
+                COLUMN_USER_EMAILC + "=?",        //columns for the WHERE clause
+                selectionArgs,        //The values for the WHERE clause
+                null,       //group the rows
+                null,       //filter by row groups
+                sortOrder); //The sort order
+
+
+        // Traversing through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Complaint c = new Complaint();
+                c.setUser(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAILC)));
+                c.setProductType(cursor.getString(cursor.getColumnIndex(COLUMN_PROD_TYPE)));
+                c.setModelNo(cursor.getString(cursor.getColumnIndex(COLUMN_MODEL_NO)));
+                c.setFileDate(cursor.getString(cursor.getColumnIndex(COLUMN_FDATE)));
+                c.setStatus_code(cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)));
+                c.setPriority(cursor.getInt(cursor.getColumnIndex(COLUMN_PRIORITY)));
+                c.setCloseDate(cursor.getString(cursor.getColumnIndex(COLUMN_CDATE)));
+                c.setDetails(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+                // Adding record to list
+                complaintList.add(c);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        System.out.println("list fetched");
+
+        // return user list
+        return complaintList;
+    }
+
     public  List<Complaint> getAllComplaints() {
         // array of columns to fetch
         String[] columns = {
@@ -208,6 +270,7 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
         List<Complaint> complaintList = new ArrayList<Complaint>();
 
         SQLiteDatabase db = this.getReadableDatabase();
+        //String[] selectionArgs = {email};
 
         // query the user table
         /**
