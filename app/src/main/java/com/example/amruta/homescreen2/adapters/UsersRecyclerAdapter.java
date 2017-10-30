@@ -34,8 +34,20 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
-        holder.textViewName.setText(listUsers.get(position).getModelNo());
-        holder.textViewEmail.setText(listUsers.get(position).getDetails());
+        holder.textViewEmail.setText(listUsers.get(position).getUser());
+        holder.textViewProduct.setText(listUsers.get(position).getProductType());
+        holder.textViewModel.setText(listUsers.get(position).getModelNo());
+        holder.textViewDetails.setText(listUsers.get(position).getDetails());
+        holder.textViewFdate.setText(listUsers.get(position).getFileDate());
+        if(listUsers.get(position).getPriority()==0)
+        {
+            holder.textViewPriority.setText("urgent");
+        }
+        else
+        {
+            holder.textViewPriority.setText("normal");
+        }
+
     }
 
     @Override
@@ -50,13 +62,22 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
      */
     public class UserViewHolder extends RecyclerView.ViewHolder {
 
-        public AppCompatTextView textViewName;
         public AppCompatTextView textViewEmail;
+        public AppCompatTextView textViewProduct;
+        public AppCompatTextView textViewModel;
+        public AppCompatTextView textViewDetails;
+        public AppCompatTextView textViewFdate;
+        public AppCompatTextView textViewPriority;
 
         public UserViewHolder(View view) {
             super(view);
-            textViewName = (AppCompatTextView) view.findViewById(R.id.textViewName);
+
             textViewEmail = (AppCompatTextView) view.findViewById(R.id.textViewEmail);
+            textViewProduct = (AppCompatTextView) view.findViewById(R.id.textViewProduct);
+            textViewModel = (AppCompatTextView) view.findViewById(R.id.textViewModel);
+            textViewDetails = (AppCompatTextView) view.findViewById(R.id.textViewDetails);
+            textViewFdate = (AppCompatTextView) view.findViewById(R.id.textViewFdate);
+            textViewPriority = (AppCompatTextView) view.findViewById(R.id.textViewPriority);
         }
     }
 

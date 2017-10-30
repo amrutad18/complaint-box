@@ -11,6 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.amruta.homescreen2.Model.Complaint;
 import com.example.amruta.homescreen2.Model.User;
@@ -43,16 +47,53 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
         private DataBaseHelper databaseHelper;
         //private com.example.amruta.homescreen2.sql.databaseHelper databaseHelper;
         private Complaint complaint;
+        private String product="Phone";
+        private int priority = 1;
 
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.complaint_register);
-            getSupportActionBar().hide();
+            getSupportActionBar().setTitle("Welcome "+getIntent().getStringExtra("EMAIL").toString().trim());
 
             initViews();
             initListeners();
             initObjects();
+        }
+
+        public void onRadioButtonClicked(View view){
+            boolean checked = ((RadioButton)view).isChecked();
+            switch(view.getId()){
+                case R.id.phone:
+                    if(checked){
+                        product = "Phone";
+                    }
+                    break;
+                case R.id.laptop:
+                    if(checked){
+                        product = "Laptop";
+                    }
+                    break;
+                case R.id.ac:
+                    if(checked){
+                        product = "AC";
+                    }
+                    break;
+            }
+
+
+        }
+
+        public void onSwitchButtonClicked(View view){
+            boolean checked = ((Switch)view).isChecked();
+            if(checked)
+            {
+                priority = 0;
+            }
+            else
+            {
+                priority = 1;
+            }
         }
 
         /**
@@ -101,6 +142,7 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
             switch (v.getId()) {
 
                 case R.id.appCompatButtonRegister:
+                    System.out.println("posting data...");
                     postDataToSQLite();
                     break;
             }
@@ -110,10 +152,10 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
          * This method is to validate the input text fields and post data to SQLite
          */
         private void postDataToSQLite() {
-            if (!inputValidation.isInputEditTextFilled(textInputEditTextModel, textInputLayoutModel, getString(R.string.error_message_name))) {
+            if (!inputValidation.isInputEditTextFilled(textInputEditTextModel, textInputLayoutModel, "Enter Model no")) {
                 return;
             }
-            if (!inputValidation.isInputEditTextFilled(textInputEditTextDescription, textInputLayoutDescription, getString(R.string.error_message_email))) {
+            if (!inputValidation.isInputEditTextFilled(textInputEditTextDescription, textInputLayoutDescription, "Enter details")) {
                 return;
             }
 
@@ -122,8 +164,8 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
                 complaint.setModelNo(textInputEditTextModel.getText().toString().trim());
                 complaint.setDetails(textInputEditTextDescription.getText().toString().trim());
                 complaint.setUser(getIntent().getStringExtra("EMAIL").toString().trim());
-                int d=(int) (new Date().getTime()/1000);
-                complaint.setFileDate(d);
+                complaint.setProductType(product);
+                complaint.setPriority(priority);
                 databaseHelper.addComplaint(complaint);
                 if(databaseHelper.checkComplaint(getIntent().getStringExtra("EMAIL"))){
                     System.out.println("Database exists");
@@ -133,7 +175,7 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
                     System.out.println("No ddd");
                 }
                 // Snack Bar to show success message that record saved successfully
-                Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.success_message), Toast.LENGTH_SHORT).show();
                 //emptyInputEditText();
                 Intent user = new Intent(activity,UsersListActivity.class);
                 //This sends the email of the user to the new activity

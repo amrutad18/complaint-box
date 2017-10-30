@@ -21,7 +21,7 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_user);
+        setContentView(R.layout.complaint_register);
         getSupportActionBar().setTitle("");
         initViews();
         emailFromIntent = getIntent().getStringExtra("EMAIL");
