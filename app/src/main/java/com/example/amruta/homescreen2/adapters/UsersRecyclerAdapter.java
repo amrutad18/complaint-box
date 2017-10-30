@@ -41,13 +41,8 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
         holder.textViewFdate.setText(listUsers.get(position).getFileDate());
         if(listUsers.get(position).getPriority()==0)
         {
-            holder.textViewPriority.setText("urgent");
+            holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_name,0,0,0);
         }
-        else
-        {
-            holder.textViewPriority.setText("normal");
-        }
-
     }
 
     @Override

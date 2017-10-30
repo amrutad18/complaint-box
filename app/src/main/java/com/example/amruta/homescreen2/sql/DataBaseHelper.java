@@ -312,6 +312,18 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
     }
 
 
+    public void updateComplaintStatus(Complaint complaint) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_STATUS, complaint.getStatus_code());
+
+        // updating row
+        db.update(TABLE_COMPLAINTS, values, COLUMN_USER_EMAIL + " = ? AND " + COLUMN_FDATE +" = ?",
+                new String[]{String.valueOf(complaint.getUser()), String.valueOf(complaint.getFileDate())});
+        db.close();
+    }
+
     /**
      * This method to update user record
      *
