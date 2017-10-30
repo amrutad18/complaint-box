@@ -12,29 +12,32 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.amruta.homescreen2.R;
-import com.example.amruta.homescreen2.adapters.UsersRecyclerAdapter;
+import com.example.amruta.homescreen2.adapters.AdminRecyclersAdapter;
 import com.example.amruta.homescreen2.Model.Complaint;
 import com.example.amruta.homescreen2.sql.DataBaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersListActivity extends AppCompatActivity {
+import static java.security.AccessController.getContext;
 
-    private AppCompatActivity activity = UsersListActivity.this;
+public class AdminComplaintList extends AppCompatActivity {
+
+    private AppCompatActivity activity = AdminComplaintList.this;
     private AppCompatTextView textViewName;
     private RecyclerView recyclerViewUsers;
     private List<Complaint> listUsers;
-    private UsersRecyclerAdapter usersRecyclerAdapter;
+    private AdminRecyclersAdapter adminRecyclerAdapter;
     private DataBaseHelper databaseHelper;
     String emailFromIntent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complaints_list);
+        setContentView(R.layout.admin_view_complaint);
         getSupportActionBar().setTitle("");
         initViews();
         initObjects();
@@ -48,6 +51,14 @@ public class UsersListActivity extends AppCompatActivity {
         textViewName = (AppCompatTextView) findViewById(R.id.textViewName);
         System.out.println("Inside initViews");
         recyclerViewUsers = (RecyclerView) findViewById(R.id.recyclerViewUsers);
+        /*recyclerViewUsers.addOnItemTouchListener(
+                new RecyclerListener(getApplicationContext(), new RecyclerListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        // TODO Handle item click
+                        System.out.println("Clicked!");
+                    }
+                })
+        );*/
     }
 
     /**
@@ -55,13 +66,13 @@ public class UsersListActivity extends AppCompatActivity {
      */
     private void initObjects() {
         listUsers = new ArrayList<>();
-        usersRecyclerAdapter = new UsersRecyclerAdapter(listUsers);
+        adminRecyclerAdapter = new AdminRecyclersAdapter(listUsers);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewUsers.setLayoutManager(mLayoutManager);
         recyclerViewUsers.setItemAnimator(new DefaultItemAnimator());
         recyclerViewUsers.setHasFixedSize(true);
-        recyclerViewUsers.setAdapter(usersRecyclerAdapter);
+        recyclerViewUsers.setAdapter(adminRecyclerAdapter);
         databaseHelper = new DataBaseHelper(activity);
 
         emailFromIntent = getIntent().getStringExtra("EMAIL");
@@ -80,7 +91,7 @@ public class UsersListActivity extends AppCompatActivity {
             protected Void doInBackground(Void... params) {
                 listUsers.clear();
                 List<Complaint>temp;
-                listUsers.addAll(databaseHelper.getAllComplaints(emailFromIntent));
+                listUsers.addAll(databaseHelper.getAllComplaints());
 
                 return null;
             }
@@ -88,7 +99,7 @@ public class UsersListActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                usersRecyclerAdapter.notifyDataSetChanged();
+                adminRecyclerAdapter.notifyDataSetChanged();
             }
         }.execute();
     }

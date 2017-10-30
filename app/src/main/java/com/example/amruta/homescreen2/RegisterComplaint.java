@@ -172,12 +172,12 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
                 }
                 else
                 {
-                    System.out.println("No ddd");
+                    System.out.println("No database");
                 }
                 // Snack Bar to show success message that record saved successfully
                 Toast.makeText(getApplicationContext(), getString(R.string.success_message), Toast.LENGTH_SHORT).show();
                 //emptyInputEditText();
-                Intent user = new Intent(activity,UsersListActivity.class);
+                Intent user = new Intent(activity,WelcomeUser.class);
                 //This sends the email of the user to the new activity
 
                 user.putExtra("EMAIL", getIntent().getStringExtra("EMAIL").toString().trim());

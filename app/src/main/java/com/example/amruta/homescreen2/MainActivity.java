@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.appCompatButtonLogin:
                 verifyFromSQLite();
-                System.out.println("HIIII");
                 break;
             case R.id.textViewLinkRegister:
                 // Navigate to RegisterActivity
@@ -127,9 +126,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(accountsIntent);
 
         } else {
-            System.out.println("Here");
-            // Snack Bar to show success message that record is wrong
-            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
+            if(textInputEditTextEmail.getText().toString().equals("admin@user.com"))
+            {
+                if(textInputEditTextPassword.getText().toString().equals("admin")) {
+                    Intent accountsIntent = new Intent(activity, WelcomeAdmin.class);
+                    //This sends the email of the user to the new activity
+                    accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+                    emptyInputEditText();
+                    startActivity(accountsIntent);
+                }
+                else
+                {
+                    Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
+                }
+            }
+            else {
+                System.out.println("Here");
+                // Snack Bar to show success message that record is wrong
+                Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
+            }
         }
     }
 
