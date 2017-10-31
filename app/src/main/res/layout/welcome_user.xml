@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorTextHint"
             android:text="new complaint"
+            android:textColor="@color/colorText"
             android:layout_marginTop="44dp"
             android:layout_below="@+id/textInputLayoutDescription"
             android:layout_alignParentLeft="true"
@@ -56,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorTextHint"
+            android:textColor="@color/colorText"
             android:text="View all complaints"
             android:layout_below="@+id/appCompatButtonRegister"
             android:layout_alignParentLeft="true"
@@ -108,6 +110,7 @@
             android:layout_alignStart="@+id/resolved_ring"
             android:layout_below="@+id/resolved_ring"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:text="Resolved" />
 
         <TextView
@@ -116,6 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView3"
             android:layout_alignRight="@+id/pending_ring"
+            android:layout_marginRight="10dp"
             android:layout_alignEnd="@+id/pending_ring"
             android:text="Pending" />
 
