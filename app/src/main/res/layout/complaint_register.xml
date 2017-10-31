@@ -4,7 +4,7 @@
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@drawable/abc1"
     android:paddingBottom="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -20,7 +20,8 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="choose product type" />
+            android:text="Choose Product Type :"
+            android:padding="10dp"/>
 
         <RadioGroup
             android:id="@+id/productType"
@@ -92,12 +93,16 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/appCompatButtonRegister"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="15dp"
             android:layout_marginTop="40dp"
+            android:layout_gravity="center"
             android:background="@color/colorTextHint"
-            android:text="Register Complaint"
-            android:drawableLeft="@drawable/ic_send_complaint"/>
+            android:text="   Register Complaint"
+            android:drawableLeft="@drawable/ic_send_complaint"
+            android:textColor="@color/colorBackground"
+            android:drawableTint="@color/colorBackground"/>
 
     </android.support.v7.widget.LinearLayoutCompat>
 

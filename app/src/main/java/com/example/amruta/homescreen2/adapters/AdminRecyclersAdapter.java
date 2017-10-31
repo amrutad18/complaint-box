@@ -3,12 +3,14 @@ package com.example.amruta.homescreen2.adapters;
 /**
  * Created by amruta on 27/10/17.
  */
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.amruta.homescreen2.R;
 import com.example.amruta.homescreen2.Model.Complaint;
@@ -43,11 +45,7 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
         holder.textViewFdate.setText(listUsers.get(position).getFileDate());
         if(listUsers.get(position).getPriority()==0)
         {
-            holder.textViewPriority.setText("urgent");
-        }
-        else
-        {
-            holder.textViewPriority.setText("normal");
+            holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_name,0,0,0);
         }
 
     }
@@ -70,6 +68,7 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
         public AppCompatTextView textViewDetails;
         public AppCompatTextView textViewFdate;
         public AppCompatTextView textViewPriority;
+        public Button resolveButton;
 
         public UserViewHolder(View view) {
             super(view);
@@ -80,6 +79,7 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
             textViewDetails = (AppCompatTextView) view.findViewById(R.id.textViewDetails);
             textViewFdate = (AppCompatTextView) view.findViewById(R.id.textViewFdate);
             textViewPriority = (AppCompatTextView) view.findViewById(R.id.textViewPriority);
+            resolveButton = (Button)view.findViewById(R.id.resolved);
         }
     }
 
