@@ -4,7 +4,7 @@
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@drawable/abc1"
     android:paddingBottom="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -39,30 +39,32 @@
         </android.support.design.widget.TextInputLayout>
 
 
-
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/appCompatButtonRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textInputLayoutDescription"
+            android:layout_marginTop="44dp"
             android:background="@color/colorTextHint"
             android:text="new complaint"
-            android:textColor="@color/colorText"
-            android:layout_marginTop="44dp"
-            android:layout_below="@+id/textInputLayoutDescription"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+
+            android:textColor="@color/colorBackground"
+            android:textColorLink="@color/colorBackground" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/appCompatButtonViewComplaints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorTextHint"
-            android:textColor="@color/colorText"
-            android:text="View all complaints"
-            android:layout_below="@+id/appCompatButtonRegister"
+
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="27dp" />
+            android:layout_below="@+id/appCompatButtonRegister"
+            android:layout_marginTop="27dp"
+            android:background="@color/colorTextHint"
+            android:text="View all complaints"
+            android:textColor="@color/colorBackground" />
 
         <TextView
             android:id="@+id/resolved_ring"

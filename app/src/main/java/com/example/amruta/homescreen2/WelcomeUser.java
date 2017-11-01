@@ -98,10 +98,6 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
                 // User chose the "My Account" item, show the app settings UI...
                 return true;
 
-            case R.id.edit_profile:
-
-                return true;
-
             case R.id.logout:
                 Intent logOutIntent = new Intent(activity,MainActivity.class);
                 startActivity(logOutIntent);
