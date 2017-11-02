@@ -52,7 +52,7 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
 
 
     @Override
-    public void onBindViewHolder(UserViewHolder holder, final int position) {
+    public void onBindViewHolder(final UserViewHolder holder, final int position) {
         holder.textViewEmail.setText(listUsers.get(position).getUser());
         holder.textViewProduct.setText(listUsers.get(position).getProductType());
         holder.textViewModel.setText(listUsers.get(position).getModelNo());
@@ -63,20 +63,48 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
             public void onClick(View v){
                 System.out.println("Button pressed resolve");
                 databaseHelper=new DataBaseHelper(v.getContext());
-                databaseHelper.deleteComplaint(listUsers.get(position).getUser(),listUsers.get(position).getModelNo());
-
-
+                //databaseHelper.deleteComplaint(listUsers.get(position).getUser(),listUsers.get(position).getModelNo());
+                listUsers.get(position).setStatus_code(1);
+                databaseHelper.updateComplaintStatus(listUsers.get(position));
+                System.out.println("status changed!");
+                if(listUsers.get(position).getPriority()==0)
+                {
+                    holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_priority,0,R.drawable.ic_resolved,0);
+                }
+                else
+                {
+                    holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_priority,0,0,0);
+                }
+                holder.resolve.setVisibility(View.GONE);
 
             }
         });
         if(listUsers.get(position).getPriority()==0)
         {
+            if(listUsers.get(position).getStatus_code()==1)
+            {
+                System.out.println("hey");
+                holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_priority,0,R.drawable.ic_resolved,0);
+                holder.resolve.setVisibility(View.GONE);
+            }
+            else
+            {
+                System.out.println("hi");
+                holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_priority,0,0,0);
+            }
 
-            holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_name,0,0,0);
         }
         else
         {
-            holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+            if(listUsers.get(position).getStatus_code()==1)
+            {
+                holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_resolved,0);
+                holder.resolve.setVisibility(View.GONE);
+            }
+            else
+            {
+                holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            }
         }
 
     }

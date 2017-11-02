@@ -42,12 +42,28 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
         holder.textViewFdate.setText(listUsers.get(position).getFileDate());
         if(listUsers.get(position).getPriority()==0)
         {
+            if(listUsers.get(position).getStatus_code()==1)
+            {
+                System.out.println("hey");
+                holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_priority,0,R.drawable.ic_resolved,0);
+            }
+            else
+            {
+                System.out.println("hi");
+                holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_priority,0,0,0);
+            }
 
-            holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_name,0,0,0);
         }
         else
         {
-            holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+            if(listUsers.get(position).getStatus_code()==1)
+            {
+                holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_resolved,0);
+            }
+            else
+            {
+                holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            }
         }
     }
 
