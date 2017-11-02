@@ -14,13 +14,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.amruta.homescreen2.Model.User;
+import com.example.amruta.homescreen2.sql.DataBaseHelper;
+
 public class WelcomeUser extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = WelcomeUser.this;
 
     private TextView textViewName,textViewName1,textViewName2;
-    String emailFromIntent, resolved_count = "3", pending_count = "6";
+    String emailFromIntent;
+    long resolved_count, pending_count;
     private AppCompatButton appCompatButtonRegister;
     private AppCompatButton appCompatButtonViewComplaints;
+    private DataBaseHelper databaseHelper;
+    private User user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,9 +37,15 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
         initViews();
         emailFromIntent = getIntent().getStringExtra("EMAIL");
         System.out.println(emailFromIntent+"ghgh");
+        user = new User();
+        databaseHelper = new DataBaseHelper(activity);
+        user.setEmail(emailFromIntent);
+        System.out.println(user.getEmail()+"ghgh");
+        resolved_count = databaseHelper.getResolvedNum(user);
+        pending_count = databaseHelper.getPendingNum(user);
         textViewName.setText(emailFromIntent);
-        textViewName1.setText(resolved_count);
-        textViewName2.setText(pending_count);
+        textViewName1.setText(String.valueOf(resolved_count));
+        textViewName2.setText(String.valueOf(pending_count));
         initListeners();
         //initObjects();
     }

@@ -3,6 +3,7 @@ package com.example.amruta.homescreen2.sql;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -322,6 +323,24 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
         db.update(TABLE_COMPLAINTS, values, COLUMN_USER_EMAIL + " = ? AND " + COLUMN_FDATE +" = ?",
                 new String[]{String.valueOf(complaint.getUser()), String.valueOf(complaint.getFileDate())});
         db.close();
+    }
+
+    public long getResolvedNum(User user)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        long numRows = DatabaseUtils.queryNumEntries(db, TABLE_COMPLAINTS, COLUMN_USER_EMAIL + " = ? AND " + COLUMN_STATUS + " = 1",
+                new String[]{String.valueOf(user.getEmail())});
+        return numRows;
+    }
+
+    public long getPendingNum(User user)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        long numRows = DatabaseUtils.queryNumEntries(db, TABLE_COMPLAINTS, COLUMN_USER_EMAIL + " = ? AND " + COLUMN_STATUS + " = 0",
+                new String[]{String.valueOf(user.getEmail())});
+        return numRows;
     }
 
     /**
