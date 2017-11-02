@@ -3,7 +3,14 @@ package com.example.amruta.homescreen2.adapters;
 /**
  * Created by amruta on 27/10/17.
  */
+
+import android.support.v7.widget.RecyclerView;
 import android.support.v4.content.ContextCompat;
+import android.content.ClipData;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,12 +24,19 @@ import com.example.amruta.homescreen2.Model.Complaint;
 
 import java.util.List;
 
-public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAdapter.UserViewHolder> {
+import com.example.amruta.homescreen2.WelcomeAdmin;
+import com.example.amruta.homescreen2.sql.DataBaseHelper;
+
+public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAdapter.UserViewHolder>{
 
     private List<Complaint> listUsers;
+    public DataBaseHelper databaseHelper;
+    public Context context;
+    //Button b;
 
     public AdminRecyclersAdapter(List<Complaint> listUsers) {
         this.listUsers = listUsers;
+        //b=(Button) itemView.findView
     }
 
     @Override
@@ -31,20 +45,33 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.admin_view_complaint, parent, false);
 
+
         return new UserViewHolder(itemView);
     }
 
 
 
     @Override
-    public void onBindViewHolder(UserViewHolder holder, int position) {
+    public void onBindViewHolder(UserViewHolder holder, final int position) {
         holder.textViewEmail.setText(listUsers.get(position).getUser());
         holder.textViewProduct.setText(listUsers.get(position).getProductType());
         holder.textViewModel.setText(listUsers.get(position).getModelNo());
         holder.textViewDetails.setText(listUsers.get(position).getDetails());
         holder.textViewFdate.setText(listUsers.get(position).getFileDate());
+        holder.resolve.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                System.out.println("Button pressed resolve");
+                databaseHelper=new DataBaseHelper(v.getContext());
+                databaseHelper.deleteComplaint(listUsers.get(position).getUser(),listUsers.get(position).getModelNo());
+
+
+
+            }
+        });
         if(listUsers.get(position).getPriority()==0)
         {
+
             holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_name,0,0,0);
         }
         else
@@ -72,7 +99,8 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
         public AppCompatTextView textViewDetails;
         public AppCompatTextView textViewFdate;
         public AppCompatTextView textViewPriority;
-        public Button resolveButton;
+        public Button b;
+        public Button resolve;
 
         public UserViewHolder(View view) {
             super(view);
@@ -83,7 +111,9 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
             textViewDetails = (AppCompatTextView) view.findViewById(R.id.textViewDetails);
             textViewFdate = (AppCompatTextView) view.findViewById(R.id.textViewFdate);
             textViewPriority = (AppCompatTextView) view.findViewById(R.id.textViewPriority);
-            resolveButton = (Button)view.findViewById(R.id.resolved);
+            //b=(Button) view.findViewById(R.id.process);
+            resolve=(Button) view.findViewById(R.id.resolved);
+
         }
     }
 

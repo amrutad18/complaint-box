@@ -8,8 +8,10 @@ package com.example.amruta.homescreen2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,19 +39,34 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
         initViews();
         emailFromIntent = getIntent().getStringExtra("EMAIL");
         System.out.println(emailFromIntent+"ghgh");
+
         user = new User();
         databaseHelper = new DataBaseHelper(activity);
         user.setEmail(emailFromIntent);
         System.out.println(user.getEmail()+"ghgh");
         resolved_count = databaseHelper.getResolvedNum(user);
         pending_count = databaseHelper.getPendingNum(user);
-        textViewName.setText(emailFromIntent);
+        textViewName.setText("Welcome "+emailFromIntent+"!");
         textViewName1.setText(String.valueOf(resolved_count));
         textViewName2.setText(String.valueOf(pending_count));
+
         initListeners();
+        //Toolbar t = (Toolbar) findViewById(R.id.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //setSupportActionBar(t);
         //initObjects();
     }
 
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        return true;
+        //finish();
+        //return true;
+    }
 
     /**
      * This method is to initialize views
@@ -109,12 +126,17 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
                 homeIntent.putExtra("EMAIL",emailFromIntent);
                 startActivity(homeIntent);
                 // User chose the "My Account" item, show the app settings UI...
+                //Intent loginscreen=new Intent(this,MainActivity.class);
                 return true;
 
             case R.id.logout:
-                Intent logOutIntent = new Intent(activity,MainActivity.class);
-                startActivity(logOutIntent);
+
+                Intent loginscreen=new Intent(this,MainActivity.class);
+                loginscreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(loginscreen);
+                this.finish();
                 return true;
+
 
             default:
                 // If we got here, the user's action was not recognized.

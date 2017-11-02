@@ -3,6 +3,7 @@ package com.example.amruta.homescreen2.adapters;
 /**
  * Created by amruta on 27/10/17.
  */
+import android.graphics.Color;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
