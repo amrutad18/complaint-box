@@ -29,8 +29,8 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
         getSupportActionBar().setTitle("");
         initViews();
         emailFromIntent = getIntent().getStringExtra("EMAIL");
-        System.out.println(emailFromIntent+"ghgh");
-        textViewName.setText(emailFromIntent);
+        //System.out.println(emailFromIntent+"ghgh");
+        //textViewName.setText(emailFromIntent);
         textViewName1.setText(resolved_count);
         textViewName2.setText(pending_count);
         initListeners();
@@ -42,7 +42,7 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
      * This method is to initialize views
      */
     private void initViews() {
-        textViewName = (TextView)findViewById(R.id.textView);
+        //textViewName = (TextView)findViewById(R.id.textView);
         appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
         appCompatButtonViewComplaints = (AppCompatButton) findViewById(R.id.appCompatButtonViewComplaints);
         textViewName1 = (TextView)findViewById(R.id.resolved_ring);
