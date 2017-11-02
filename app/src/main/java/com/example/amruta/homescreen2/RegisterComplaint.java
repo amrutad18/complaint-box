@@ -167,6 +167,7 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
                 complaint.setDetails(textInputEditTextDescription.getText().toString().trim());
                 complaint.setUser(getIntent().getStringExtra("EMAIL").toString().trim());
                 complaint.setProductType(product);
+                System.out.println(priority);
                 complaint.setPriority(priority);
                 databaseHelper.addComplaint(complaint);
                 if(databaseHelper.checkComplaint(getIntent().getStringExtra("EMAIL"))){

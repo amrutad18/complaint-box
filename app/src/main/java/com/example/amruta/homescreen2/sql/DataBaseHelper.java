@@ -147,7 +147,7 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
         };
         // sorting orders
         String sortOrder =
-                COLUMN_FDATE + " ASC";
+                COLUMN_USER_EMAIL+ " ASC";
         List<User> userList = new ArrayList<User>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -207,7 +207,8 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
         };
         // sorting orders
         String sortOrder =
-                COLUMN_FDATE + " ASC";
+                COLUMN_PRIORITY+ " ASC, " + COLUMN_FDATE + " ASC";
+
         List<Complaint> complaintList = new ArrayList<Complaint>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -267,7 +268,7 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
         };
         // sorting orders
         String sortOrder =
-                COLUMN_FDATE + " ASC";
+                COLUMN_PRIORITY+ " ASC, " + COLUMN_FDATE + " ASC";
         List<Complaint> complaintList = new ArrayList<Complaint>();
 
         SQLiteDatabase db = this.getReadableDatabase();
