@@ -43,6 +43,10 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
         {
             holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_name,0,0,0);
         }
+        else
+        {
+            holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+        }
     }
 
     @Override
