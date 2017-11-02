@@ -118,11 +118,15 @@ public class UsersListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
+                Intent homeIntent = new Intent(activity, WelcomeUser.class);
+                homeIntent.putExtra("EMAIL",emailFromIntent);
+                startActivity(homeIntent);
                 // User chose the "My Account" item, show the app settings UI...
                 return true;
 
             case R.id.logout:
-
+                Intent logOutIntent = new Intent(activity,MainActivity.class);
+                startActivity(logOutIntent);
                 return true;
 
             default:

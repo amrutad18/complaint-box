@@ -1,10 +1,5 @@
 package com.example.amruta.homescreen2;
 
-/**
- * Created by amruta on 25/10/17.
- */
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +18,7 @@ import com.example.amruta.homescreen2.sql.DataBaseHelper;
 public class WelcomeUser extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = WelcomeUser.this;
 
-    private TextView textViewName,textViewName1,textViewName2;
+    private TextView textViewName1,textViewName2;
     String emailFromIntent;
     long resolved_count, pending_count;
     private AppCompatButton appCompatButtonRegister;
@@ -35,26 +30,21 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_user);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Welcome  "+getIntent().getStringExtra("EMAIL").toString().trim());
         initViews();
         emailFromIntent = getIntent().getStringExtra("EMAIL");
         System.out.println(emailFromIntent+"ghgh");
-
         user = new User();
         databaseHelper = new DataBaseHelper(activity);
         user.setEmail(emailFromIntent);
         System.out.println(user.getEmail()+"ghgh");
         resolved_count = databaseHelper.getResolvedNum(user);
         pending_count = databaseHelper.getPendingNum(user);
-        textViewName.setText("Welcome "+emailFromIntent+"!");
         textViewName1.setText(String.valueOf(resolved_count));
         textViewName2.setText(String.valueOf(pending_count));
 
         initListeners();
-        //Toolbar t = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //setSupportActionBar(t);
-        //initObjects();
     }
 
 
@@ -72,7 +62,6 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
      * This method is to initialize views
      */
     private void initViews() {
-        textViewName = (TextView)findViewById(R.id.textView);
         appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
         appCompatButtonViewComplaints = (AppCompatButton) findViewById(R.id.appCompatButtonViewComplaints);
         textViewName1 = (TextView)findViewById(R.id.resolved_ring);
@@ -83,8 +72,6 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
     private void initListeners() {
         appCompatButtonRegister.setOnClickListener(this);
         appCompatButtonViewComplaints.setOnClickListener(this);
-        //appCompatTextViewLoginLink.setOnClickListener(this);
-
     }
 
     @Override
@@ -97,15 +84,14 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
 
                 accountsIntent.putExtra("EMAIL",emailFromIntent);
                 startActivity(accountsIntent);
-
                 break;
+
             case R.id.appCompatButtonViewComplaints:
                 Intent accountsIntent2 = new Intent(activity,UsersListActivity.class);
                 //This sends the email of the user to the new activity
 
                 accountsIntent2.putExtra("EMAIL",emailFromIntent);
                 startActivity(accountsIntent2);
-
                 break;
         }
     }
@@ -122,15 +108,10 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
-                Intent homeIntent = new Intent(activity, WelcomeUser.class);
-                homeIntent.putExtra("EMAIL",emailFromIntent);
-                startActivity(homeIntent);
-                // User chose the "My Account" item, show the app settings UI...
-                //Intent loginscreen=new Intent(this,MainActivity.class);
+
                 return true;
 
             case R.id.logout:
-
                 Intent loginscreen=new Intent(this,MainActivity.class);
                 loginscreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(loginscreen);

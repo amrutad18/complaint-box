@@ -111,6 +111,10 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
             textViewDetails = (AppCompatTextView) view.findViewById(R.id.textViewDetails);
             textViewFdate = (AppCompatTextView) view.findViewById(R.id.textViewFdate);
             textViewPriority = (AppCompatTextView) view.findViewById(R.id.textViewPriority);
+
+
+            //resolveButton = (Button)view.findViewById(R.id.resolved);
+
             //b=(Button) view.findViewById(R.id.process);
             resolve=(Button) view.findViewById(R.id.resolved);
 
