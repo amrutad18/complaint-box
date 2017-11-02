@@ -9,7 +9,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp"
-    tools:context=".com.example.amruta.homescreen2.WelcomeUser">
+    tools:context="com.example.amruta.homescreen2.WelcomeUser">
 
 
     <RelativeLayout
@@ -27,6 +27,7 @@
             android:layout_marginTop="80dp"
             android:background="@color/colorPrimary"
             android:text="new complaint"
+
             android:textColor="@color/colorBackground"
             android:textColorLink="@color/colorBackground" />
 
@@ -68,6 +69,7 @@
             android:layout_height="80dp"
             android:layout_alignParentBottom="false"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_gravity="center"
             android:layout_marginEnd="56dp"
             android:layout_marginRight="56dp"
@@ -88,6 +90,7 @@
             android:layout_alignStart="@+id/resolved_ring"
             android:layout_below="@+id/resolved_ring"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:text="Resolved" />
 
         <TextView
@@ -95,8 +98,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView3"
-            android:layout_alignEnd="@+id/pending_ring"
             android:layout_alignRight="@+id/pending_ring"
+            android:layout_marginRight="10dp"
+            android:layout_alignEnd="@+id/pending_ring"
             android:text="Pending" />
 
 

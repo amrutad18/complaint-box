@@ -49,15 +49,15 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
         private DataBaseHelper databaseHelper;
         //private com.example.amruta.homescreen2.sql.databaseHelper databaseHelper;
         private Complaint complaint;
-        private String product="Phone";
+        private String product="Phone", emailFromIntent;
         private int priority = 1;
 
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.complaint_register);
-            getSupportActionBar().setTitle("Welcome "+getIntent().getStringExtra("EMAIL").toString().trim());
-
+            getSupportActionBar().setTitle("New Complaint");
+            emailFromIntent = getIntent().getStringExtra("EMAIL");
             initViews();
             initListeners();
             initObjects();
@@ -210,15 +210,14 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
-                // User chose the "My Account" item, show the app settings UI...
-                return true;
-
-            case R.id.edit_profile:
-
+                Intent homeIntent = new Intent(activity, WelcomeUser.class);
+                homeIntent.putExtra("EMAIL",emailFromIntent);
+                startActivity(homeIntent);
                 return true;
 
             case R.id.logout:
-
+                Intent logOutIntent = new Intent(activity,MainActivity.class);
+                startActivity(logOutIntent);
                 return true;
 
             default:

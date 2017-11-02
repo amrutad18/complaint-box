@@ -9,11 +9,6 @@
         android:title="Home"
         app:showAsAction="never" />
     <item
-        android:id="@+id/edit_profile"
-        android:orderInCategory="100"
-        android:title="Edit Profile"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/logout"
         android:orderInCategory="100"
         android:title="Logout"

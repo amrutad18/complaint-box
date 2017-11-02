@@ -4,6 +4,7 @@ package com.example.amruta.homescreen2;
  * Created by amruta on 27/10/17.
  */
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,8 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.amruta.homescreen2.R;
 import com.example.amruta.homescreen2.adapters.UsersRecyclerAdapter;
@@ -91,5 +94,35 @@ public class UsersListActivity extends AppCompatActivity {
                 usersRecyclerAdapter.notifyDataSetChanged();
             }
         }.execute();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_dashboard, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home:
+                Intent homeIntent = new Intent(activity, WelcomeUser.class);
+                homeIntent.putExtra("EMAIL",emailFromIntent);
+                startActivity(homeIntent);
+                // User chose the "My Account" item, show the app settings UI...
+                return true;
+
+            case R.id.logout:
+                Intent logOutIntent = new Intent(activity,MainActivity.class);
+                startActivity(logOutIntent);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

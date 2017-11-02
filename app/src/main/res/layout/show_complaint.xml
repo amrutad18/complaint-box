@@ -6,6 +6,8 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:gravity="center"
+        android:textSize="25dp"
         android:text="TextView" />
 
 </LinearLayout>
