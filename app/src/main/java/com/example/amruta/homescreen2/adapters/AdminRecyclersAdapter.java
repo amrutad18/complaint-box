@@ -58,6 +58,7 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
         holder.textViewModel.setText(listUsers.get(position).getModelNo());
         holder.textViewDetails.setText(listUsers.get(position).getDetails());
         holder.textViewFdate.setText(listUsers.get(position).getFileDate());
+        holder.resolve.setVisibility(View.VISIBLE);
         holder.resolve.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -69,11 +70,12 @@ public class AdminRecyclersAdapter extends RecyclerView.Adapter<AdminRecyclersAd
                 System.out.println("status changed!");
                 if(listUsers.get(position).getPriority()==0)
                 {
+                    System.out.println("!!!");
                     holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_priority,0,R.drawable.ic_resolved,0);
                 }
                 else
                 {
-                    holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_priority,0,0,0);
+                    holder.textViewPriority.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_resolved,0);
                 }
                 holder.resolve.setVisibility(View.GONE);
 
