@@ -93,6 +93,7 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -104,15 +105,15 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
+                Intent homeIntent = new Intent(activity, WelcomeUser.class);
+                homeIntent.putExtra("EMAIL",emailFromIntent);
+                startActivity(homeIntent);
                 // User chose the "My Account" item, show the app settings UI...
                 return true;
 
-            case R.id.edit_profile:
-
-                return true;
-
             case R.id.logout:
-
+                Intent logOutIntent = new Intent(activity,MainActivity.class);
+                startActivity(logOutIntent);
                 return true;
 
             default:

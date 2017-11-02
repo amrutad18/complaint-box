@@ -213,10 +213,6 @@ public class RegisterComplaint extends AppCompatActivity implements View.OnClick
                 // User chose the "My Account" item, show the app settings UI...
                 return true;
 
-            case R.id.edit_profile:
-
-                return true;
-
             case R.id.logout:
 
                 return true;

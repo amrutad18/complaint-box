@@ -9,7 +9,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp"
-    tools:context=".com.example.amruta.homescreen2.RegisterComplaint">
+    tools:context="com.example.amruta.homescreen2.RegisterComplaint">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -99,6 +99,7 @@
             android:layout_marginTop="40dp"
             android:layout_gravity="center"
             android:background="@color/colorTextHint"
+
             android:text="   Register Complaint"
             android:drawableLeft="@drawable/ic_send_complaint"
             android:textColor="@color/colorBackground"
