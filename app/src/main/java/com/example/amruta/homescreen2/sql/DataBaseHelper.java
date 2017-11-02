@@ -350,11 +350,11 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
      *
      * @param complaint
      */
-    public void deleteComplaint(Complaint complaint) {
+    public void deleteComplaint(String email,String model) {
         SQLiteDatabase db = this.getWritableDatabase();
         // delete record by id
-        String email = complaint.getUser();
-        String model = complaint.getModelNo();
+        //String email = complaint.getUser();
+        //String model = complaint.getModelNo();
         db.delete(TABLE_COMPLAINTS, COLUMN_USER_EMAILC + " = ? AND " + COLUMN_MODEL_NO + "= ?",
                 new String[]{email, model});
         db.close();

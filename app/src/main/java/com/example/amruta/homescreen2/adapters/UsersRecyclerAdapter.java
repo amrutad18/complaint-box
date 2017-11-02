@@ -3,6 +3,7 @@ package com.example.amruta.homescreen2.adapters;
 /**
  * Created by amruta on 27/10/17.
  */
+import android.graphics.Color;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
         if(listUsers.get(position).getPriority()==0)
         {
             holder.textViewPriority.setText("urgent");
+            holder.textViewPriority.setTextColor(Color.RED);
         }
         else
         {

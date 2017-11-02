@@ -4,6 +4,7 @@ package com.example.amruta.homescreen2;
  * Created by amruta on 27/10/17.
  */
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,7 +39,18 @@ public class UsersListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         initViews();
         initObjects();
+        emailFromIntent = getIntent().getStringExtra("EMAIL");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        Intent intent = new Intent(this,WelcomeUser.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EMAIL",emailFromIntent);
+        startActivity(intent);
+        return true;
     }
 
     /**

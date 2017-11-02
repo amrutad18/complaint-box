@@ -149,17 +149,10 @@
             android:layout_width="fill_parent"
             android:layout_alignParentBottom="true">
             <Button
-                android:id="@+id/process"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="In process">
-            </Button>
-            <Button
                 android:id="@+id/resolved"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Resolve process">
+                android:layout_weight="1" android:text="Resolve complaint">
             </Button>
         </LinearLayout>
 
