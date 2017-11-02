@@ -25,7 +25,7 @@ import com.example.amruta.homescreen2.sql.DataBaseHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WelcomeAdmin extends AppCompatActivity implements View.OnClickListener {
+public class WelcomeAdmin extends AppCompatActivity {
 
     private AppCompatActivity activity = WelcomeAdmin.this;
     private AppCompatTextView textViewName;
@@ -46,7 +46,16 @@ public class WelcomeAdmin extends AppCompatActivity implements View.OnClickListe
         initViews();
         initObjects();
         initListeners();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        return true;
     }
 
     /**
@@ -55,7 +64,7 @@ public class WelcomeAdmin extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
         textViewName = (AppCompatTextView) findViewById(R.id.textViewName);
         System.out.println("Inside initViews");
-        appCompatButtonInProcess = (Button) findViewById(R.id.process);
+        //appCompatButtonInProcess = (Button) findViewById(R.id.process);
         appCompatButtonResolved = (Button) findViewById(R.id.resolved);
         recyclerViewUsers = (RecyclerView) findViewById(R.id.recyclerViewUsers);
     }
@@ -71,16 +80,12 @@ public class WelcomeAdmin extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
+    /*@Override
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.process:
-                // When the admin presses the in process button(sends the engineer)
-                System.out.println((AppCompatTextView) findViewById(R.id.textViewEmail));
-                break;
             case R.id.resolved:
-                Intent accountsIntent2 = new Intent(activity,UsersListActivity.class);
+                Intent accountsIntent2 = new Intent(activity,WelcomeAdmin.class);
                 //This sends the email of the user to the new activity
 
                 accountsIntent2.putExtra("EMAIL",emailFromIntent);
@@ -88,7 +93,7 @@ public class WelcomeAdmin extends AppCompatActivity implements View.OnClickListe
 
                 break;
         }
-    }
+    }*/
 
     /**
      * This method is to initialize objects to be used

@@ -3,8 +3,10 @@ package com.example.amruta.homescreen2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,10 +43,23 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
         textViewName1.setText(String.valueOf(resolved_count));
         textViewName2.setText(String.valueOf(pending_count));
         initListeners();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
-    //This method is to initialize views
+    @Override
+    public boolean onSupportNavigateUp(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        return true;
+        //finish();
+        //return true;
+    }
+
+    /**
+     * This method is to initialize views
+     */
     private void initViews() {
         appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
         appCompatButtonViewComplaints = (AppCompatButton) findViewById(R.id.appCompatButtonViewComplaints);
@@ -96,9 +111,12 @@ public class WelcomeUser extends AppCompatActivity implements View.OnClickListen
                 return true;
 
             case R.id.logout:
-                Intent logOutIntent = new Intent(activity,MainActivity.class);
-                startActivity(logOutIntent);
+                Intent loginscreen=new Intent(this,MainActivity.class);
+                loginscreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(loginscreen);
+                this.finish();
                 return true;
+
 
             default:
                 // If we got here, the user's action was not recognized.
