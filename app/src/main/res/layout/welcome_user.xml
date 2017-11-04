@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_bg"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    tools:context="com.example.amruta.homescreen2.WelcomeUser">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="550dp">
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/appCompatButtonRegister"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textInputLayoutDescription"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorPrimary"
+            android:text="new complaint"
+
+            android:textColor="@color/colorBackground"
+            android:textColorLink="@color/colorBackground" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/appCompatButtonViewComplaints"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/appCompatButtonRegister"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorPrimary"
+            android:text="View all complaints"
+            android:textColor="@color/colorBackground" />
+
+        <TextView
+            android:id="@+id/resolved_ring"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="46dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="320dp"
+            android:background="@drawable/circle_status"
+            android:gravity="center"
+            android:shadowColor="@android:color/white"
+            android:shadowRadius="10.0"
+            android:text="4"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/pending_ring"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="56dp"
+            android:layout_marginRight="56dp"
+            android:layout_marginTop="320dp"
+            android:background="@drawable/circle_status"
+            android:gravity="center"
+            android:shadowColor="@android:color/white"
+            android:shadowRadius="10.0"
+            android:text="4"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/resolved_ring"
+            android:layout_alignStart="@+id/resolved_ring"
+            android:layout_below="@+id/resolved_ring"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Resolved" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_alignRight="@+id/pending_ring"
+            android:layout_marginRight="10dp"
+            android:layout_alignEnd="@+id/pending_ring"
+            android:text="Pending" />
+
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

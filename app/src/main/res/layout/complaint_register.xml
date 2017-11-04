@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_bg"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    tools:context="com.example.amruta.homescreen2.RegisterComplaint">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Choose Product Type :"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/productType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:onClick="onRadioButtonClicked"
+                android:padding="5dp"
+                android:text="Mobile phones" />
+
+            <RadioButton
+                android:id="@+id/laptop"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="onRadioButtonClicked"
+                android:padding="5dp"
+                android:text="Laptop" />
+
+            <RadioButton
+                android:id="@+id/ac"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="onRadioButtonClicked"
+                android:padding="5dp"
+                android:text="Air conditioner" />
+
+        </RadioGroup>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/textInputEditTextModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Model No."
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@android:color/black" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/textInputEditTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Details"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:maxLines="5"
+                android:textColor="@android:color/black" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Switch
+            android:id="@+id/priority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:onClick="onSwitchButtonClicked"
+            android:padding="10dp"
+            android:text="Mark as urgent" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/appCompatButtonRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorTextHint"
+            android:drawableLeft="@drawable/ic_send_complaint"
+            android:drawableTint="@color/colorBackground"
+            android:padding="15dp"
+            android:text="   Register Complaint"
+            android:textColor="@color/colorBackground" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</android.support.v4.widget.NestedScrollView>
